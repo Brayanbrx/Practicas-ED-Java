@@ -21,12 +21,29 @@ public class CuentasUsuarios {
         clientesBanco.add(cl2);
         clientesBanco.add(cl3);
         clientesBanco.add(cl4);
-        
-         clientesBanco.add(cl5);
-        
+       
+        //FOREACH me sirve solo para recorrer, si intento eliminar mientras recorro me sale un problema de concurrencia
+       /*  clientesBanco.add(cl5); //No lo agrega por ser un HashSet que no acepta elementos duplicados    
         for(Cliente e:clientesBanco){
-            System.out.println(e);
+            //System.out.println(e);
+        }*/
+        
+       //Para ELIMINAR objetos de la lista es mucho mas util el iterator
+        Iterator<Cliente> it=clientesBanco.iterator(); //creo un iterator y le asigno la coleccion para iterar
+        while(it.hasNext()){
+            String nombre_cliente=it.next().getNombre();
+            //System.out.println(nombre_cliente);
+            if(nombre_cliente.equals("Julio Iglesias"))
+                it.remove();
+            //System.out.println(it.next().getNombre());
         }
+        
+        for(Cliente cliente:clientesBanco){
+            System.out.println(cliente);
+        }
+        
+        
+        
     }
     
 }
